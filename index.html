@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090a09">
+  <meta name="description" content="Litops Atelier — браслеты ручной работы из натуральных камней и серебра 925.">
+  <title>Litops Atelier — украшения ручной работы</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <div class="announcement" aria-label="Преимущества магазина">
+    <div class="announcement__track">
+      <span><i data-lucide="truck"></i> Бесплатная доставка по России от 7 000 ₽</span>
+      <span><i data-lucide="gift"></i> Подарочная упаковка к каждому заказу</span>
+      <span><i data-lucide="refresh-cw"></i> 30 дней на обмен и возврат</span>
+    </div>
+  </div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header__inner">
+      <a class="brand" href="#top" aria-label="Litops Atelier — на главную">
+        <img src="assets/brand/logo-light.png" alt="Litops Atelier">
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Основная навигация">
+        <a href="#catalog">Каталог</a>
+        <a href="#collections">Коллекции</a>
+        <a href="#atelier">О бренде</a>
+        <a href="#custom">Индивидуальный заказ</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-button" id="searchButton" type="button" aria-label="Поиск">
+          <i data-lucide="search"></i>
+        </button>
+        <button class="icon-button counter-button" id="favoritesButton" type="button" aria-label="Избранное">
+          <i data-lucide="heart"></i><span id="favoriteCount">0</span>
+        </button>
+        <a class="icon-button desktop-only" href="admin.html" aria-label="Панель администратора" title="Демо админ-панели">
+          <i data-lucide="user-round-cog"></i>
+        </a>
+        <button class="cart-button" id="cartButton" type="button" aria-label="Открыть корзину">
+          <i data-lucide="shopping-bag"></i>
+          <span><b>Корзина</b><small id="cartSummary">0 ₽</small></span>
+          <em id="cartCount">0</em>
+        </button>
+        <button class="menu-button" id="menuButton" type="button" aria-label="Открыть меню" aria-expanded="false">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero__glow hero__glow--one"></div>
+      <div class="hero__glow hero__glow--two"></div>
+
+      <div class="container hero__grid">
+        <div class="hero__copy reveal">
+          <p class="eyebrow">Ручная работа · Натуральные материалы</p>
+          <h1>Украшения, в которых чувствуется рука мастера</h1>
+          <p class="hero__lead">Браслеты из натуральных камней и серебра 925, собранные вручную с вниманием к природному рисунку каждого минерала.</p>
+          <div class="hero__actions">
+            <a class="button button--gold" href="#catalog">Смотреть коллекцию <i data-lucide="arrow-right"></i></a>
+            <a class="button button--outline" href="#custom">Индивидуальный заказ</a>
+          </div>
+          <div class="hero__benefits" aria-label="Преимущества">
+            <span><i data-lucide="gem"></i> Натуральные камни</span>
+            <span><i data-lucide="hand"></i> Ручная сборка</span>
+            <span><i data-lucide="shield-check"></i> Контроль качества</span>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal reveal--delay">
+          <div class="hero__orb" aria-hidden="true"></div>
+          <img class="hero__product" id="heroImage" src="assets/products/prehnite.webp" alt="Браслет из пренита Litops Atelier">
+          <div class="hero__reflection" aria-hidden="true"></div>
+
+          <article class="featured-card glass-card" id="featuredCard">
+            <div class="featured-card__top">
+              <span class="badge">Выбор мастера</span>
+              <button class="icon-button favorite-toggle" type="button" data-product-id="prehnite" aria-label="Добавить в избранное">
+                <i data-lucide="heart"></i>
+              </button>
+            </div>
+            <img id="featuredImage" src="assets/products/prehnite.webp" alt="Пренит">
+            <p class="featured-card__meta">Натуральный камень · серебро 925</p>
+            <h2 id="featuredName">Пренит</h2>
+            <div class="featured-card__bottom">
+              <strong id="featuredPrice">5 490 ₽</strong>
+              <button class="square-button add-to-cart" type="button" data-product-id="prehnite" aria-label="Добавить Пренит в корзину">
+                <i data-lucide="shopping-bag"></i>
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="category-section" aria-label="Категории изделий">
+      <div class="container">
+        <div class="category-bar" id="categoryBar">
+          <button class="category-chip is-active" type="button" data-filter="all"><i data-lucide="layout-grid"></i> Все браслеты</button>
+          <button class="category-chip" type="button" data-filter="light"><i data-lucide="sun-medium"></i> Светлые камни</button>
+          <button class="category-chip" type="button" data-filter="color"><i data-lucide="palette"></i> Цветные</button>
+          <button class="category-chip" type="button" data-filter="rare"><i data-lucide="sparkles"></i> Редкие минералы</button>
+          <button class="category-chip" type="button" data-filter="silver"><i data-lucide="circle-dot"></i> Серебро 925</button>
+          <button class="category-chip" type="button" data-filter="gift"><i data-lucide="gift"></i> Для подарка</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog section-shell" id="catalog">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <p class="eyebrow">Коллекция натуральных камней</p>
+            <h2>Новые изделия</h2>
+          </div>
+          <div class="section-heading__tools">
+            <label class="sort-select">
+              <span class="sr-only">Сортировка</span>
+              <select id="sortSelect">
+                <option value="featured">Сначала избранное</option>
+                <option value="price-asc">Цена: по возрастанию</option>
+                <option value="price-desc">Цена: по убыванию</option>
+                <option value="name">По названию</option>
+              </select>
+              <i data-lucide="chevron-down"></i>
+            </label>
+          </div>
+        </div>
+
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+        <p class="empty-state" id="emptyState" hidden>По выбранному фильтру пока нет изделий.</p>
+      </div>
+    </section>
+
+    <section class="split-section section-shell" id="custom">
+      <div class="container split-grid">
+        <article class="custom-card reveal">
+          <div class="custom-card__content">
+            <p class="eyebrow">Индивидуальный подход</p>
+            <h2>Создайте свой браслет</h2>
+            <p>Подберём камни, размер бусин и фурнитуру под ваш стиль, событие или смысл, который хочется сохранить.</p>
+            <button class="button button--gold" type="button" id="customOrderButton">Обсудить заказ <i data-lucide="arrow-right"></i></button>
+          </div>
+          <div class="custom-card__art" aria-hidden="true">
+            <span class="stone stone--a"></span><span class="stone stone--b"></span><span class="stone stone--c"></span>
+            <div class="custom-card__bracelet"></div>
+          </div>
+        </article>
+
+        <article class="why-card glass-card reveal reveal--delay" id="atelier">
+          <p class="eyebrow">Litops Atelier</p>
+          <h2>Почему выбирают нас</h2>
+          <div class="why-grid">
+            <div><i data-lucide="hand"></i><h3>Ручная работа</h3><p>Каждое изделие собирается мастером, а не конвейером.</p></div>
+            <div><i data-lucide="leaf"></i><h3>Натуральные материалы</h3><p>Камни с уникальным природным рисунком и серебро 925.</p></div>
+            <div><i data-lucide="wand-sparkles"></i><h3>Индивидуальный дизайн</h3><p>Сочетания под запястье, настроение и личную историю.</p></div>
+            <div><i data-lucide="package-check"></i><h3>Премиальная упаковка</h3><p>Изделие готово стать подарком сразу после получения.</p></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="container stats-grid reveal">
+        <div><i data-lucide="users"></i><strong>1 200+</strong><span>довольных клиентов</span></div>
+        <div><i data-lucide="star"></i><strong>4,9 из 5</strong><span>средняя оценка</span></div>
+        <div><i data-lucide="leaf"></i><strong>100%</strong><span>натуральные камни</span></div>
+        <div><i data-lucide="refresh-cw"></i><strong>30 дней</strong><span>на обмен и возврат</span></div>
+      </div>
+    </section>
+
+    <section class="collection-feature section-shell" id="collections">
+      <div class="container">
+        <article class="collection-banner reveal">
+          <div class="collection-banner__copy">
+            <p class="eyebrow">Новая коллекция</p>
+            <h2>Сила природы<br>в каждой детали</h2>
+            <p>Шесть минералов, шесть характеров. Выберите оттенок и фактуру, которые откликаются именно вам.</p>
+            <a class="button button--gold" href="#catalog">Смотреть коллекцию <i data-lucide="arrow-right"></i></a>
+          </div>
+          <div class="collection-banner__products" aria-label="Браслеты коллекции">
+            <img src="assets/products/charoite.webp" alt="Чароит">
+            <img src="assets/products/larimar.webp" alt="Ларимар">
+            <img src="assets/products/rutilated-quartz.webp" alt="Кварц рутиловый">
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="admin-preview section-shell">
+      <div class="container admin-preview__grid reveal">
+        <div class="admin-preview__copy">
+          <p class="eyebrow">Управление магазином</p>
+          <h2>Демо-панель администратора</h2>
+          <p>Добавляйте товары, меняйте цены, управляйте остатками и просматривайте заявки. В версии для GitHub Pages данные сохраняются локально в браузере.</p>
+          <ul>
+            <li><i data-lucide="check"></i> Товары, цены, категории и остатки</li>
+            <li><i data-lucide="check"></i> Заявки на индивидуальные заказы</li>
+            <li><i data-lucide="check"></i> Экспорт и импорт каталога в JSON</li>
+            <li><i data-lucide="check"></i> Аналитический обзор интерфейса</li>
+          </ul>
+          <a class="button button--gold" href="admin.html">Открыть демо-панель <i data-lucide="arrow-right"></i></a>
+        </div>
+
+        <div class="dashboard-mockup glass-card" aria-hidden="true">
+          <aside>
+            <img src="assets/brand/logo-light.png" alt="">
+            <span class="is-active"><i data-lucide="layout-dashboard"></i> Обзор</span>
+            <span><i data-lucide="shopping-bag"></i> Заказы</span>
+            <span><i data-lucide="package"></i> Товары</span>
+            <span><i data-lucide="users"></i> Клиенты</span>
+            <span><i data-lucide="chart-no-axes-combined"></i> Аналитика</span>
+          </aside>
+          <div class="dashboard-mockup__main">
+            <div class="dashboard-mockup__title"><b>Обзор</b><span>Последние 30 дней</span></div>
+            <div class="dashboard-cards">
+              <div><span>Заказы</span><b>1 248</b><small>+18%</small></div>
+              <div><span>Выручка</span><b>327 893 ₽</b><small>+24%</small></div>
+              <div><span>Клиенты</span><b>892</b><small>+15%</small></div>
+            </div>
+            <div class="chart-card">
+              <div class="chart-line"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="chart-labels"><span>Янв</span><span>Фев</span><span>Мар</span><span>Апр</span><span>Май</span><span>Июн</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacts">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/brand/logo-light.png" alt="Litops Atelier">
+        <p>Украшения ручной работы из натуральных камней и серебра 925.</p>
+        <div class="socials">
+          <a href="https://www.wildberries.ru/seller/4489837" target="_blank" rel="noopener" aria-label="Магазин на Wildberries">WB</a>
+          <a href="#" aria-label="Telegram"><i data-lucide="send"></i></a>
+          <a href="#" aria-label="ВКонтакте">VK</a>
+        </div>
+      </div>
+      <div>
+        <h3>Каталог</h3>
+        <a href="#catalog">Все браслеты</a>
+        <a href="#catalog">Натуральные камни</a>
+        <a href="#catalog">С серебром 925</a>
+        <a href="#custom">Индивидуальный заказ</a>
+      </div>
+      <div>
+        <h3>Информация</h3>
+        <a href="#atelier">О бренде</a>
+        <a href="#">Доставка и оплата</a>
+        <a href="#">Возврат и обмен</a>
+        <a href="#">Уход за украшениями</a>
+      </div>
+      <div class="newsletter">
+        <h3>Будьте в курсе новинок</h3>
+        <p>Редкие минералы, новые коллекции и закрытые предложения.</p>
+        <form id="newsletterForm">
+          <input type="email" name="email" placeholder="Ваш e-mail" required aria-label="Ваш e-mail">
+          <button type="submit" aria-label="Подписаться"><i data-lucide="arrow-right"></i></button>
+        </form>
+        <small id="newsletterMessage"></small>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 Litops Atelier. Все права защищены.</span>
+      <div><a href="#">Политика конфиденциальности</a><a href="#">Публичная оферта</a></div>
+    </div>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <aside class="side-drawer" id="cartDrawer" aria-hidden="true" aria-labelledby="cartTitle">
+    <div class="drawer-header">
+      <div><p class="eyebrow">Ваш выбор</p><h2 id="cartTitle">Корзина</h2></div>
+      <button class="icon-button drawer-close" type="button" data-close-drawer aria-label="Закрыть"><i data-lucide="x"></i></button>
+    </div>
+    <div class="drawer-content" id="cartItems"></div>
+    <div class="drawer-footer">
+      <div class="cart-total"><span>Итого</span><strong id="cartTotal">0 ₽</strong></div>
+      <a class="button button--gold button--full" href="https://www.wildberries.ru/seller/4489837" target="_blank" rel="noopener">Перейти в магазин на WB</a>
+      <small>Корзина на этой версии демонстрационная. Покупка оформляется на Wildberries.</small>
+    </div>
+  </aside>
+
+  <aside class="side-drawer" id="favoritesDrawer" aria-hidden="true" aria-labelledby="favoritesTitle">
+    <div class="drawer-header">
+      <div><p class="eyebrow">Сохранённое</p><h2 id="favoritesTitle">Избранное</h2></div>
+      <button class="icon-button drawer-close" type="button" data-close-drawer aria-label="Закрыть"><i data-lucide="x"></i></button>
+    </div>
+    <div class="drawer-content" id="favoriteItems"></div>
+  </aside>
+
+  <aside class="search-panel" id="searchPanel" aria-hidden="true">
+    <div class="search-panel__inner container">
+      <div class="search-panel__top">
+        <label>
+          <i data-lucide="search"></i>
+          <input id="searchInput" type="search" placeholder="Найти камень или браслет…" autocomplete="off">
+        </label>
+        <button class="icon-button" id="searchClose" type="button" aria-label="Закрыть поиск"><i data-lucide="x"></i></button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+  </aside>
+
+  <dialog class="product-dialog" id="productDialog">
+    <button class="icon-button dialog-close" type="button" id="dialogClose" aria-label="Закрыть"><i data-lucide="x"></i></button>
+    <div class="product-dialog__media"><img id="dialogImage" src="" alt=""></div>
+    <div class="product-dialog__content">
+      <p class="eyebrow" id="dialogMaterial"></p>
+      <h2 id="dialogName"></h2>
+      <p id="dialogDescription"></p>
+      <div class="product-dialog__facts">
+        <span><i data-lucide="circle-ruler"></i> Регулируемый размер</span>
+        <span><i data-lucide="badge-check"></i> Серебро 925</span>
+        <span><i data-lucide="package-check"></i> Подарочная упаковка</span>
+      </div>
+      <div class="product-dialog__buy">
+        <strong id="dialogPrice"></strong>
+        <button class="button button--gold add-to-cart" id="dialogAddToCart" type="button">Добавить в корзину</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="order-dialog" id="orderDialog">
+    <button class="icon-button dialog-close" type="button" id="orderDialogClose" aria-label="Закрыть"><i data-lucide="x"></i></button>
+    <div class="order-dialog__heading">
+      <p class="eyebrow">Индивидуальный заказ</p>
+      <h2>Расскажите о будущем браслете</h2>
+      <p>Заявка сохранится в демо-панели администратора этого браузера.</p>
+    </div>
+    <form id="customOrderForm" class="order-form">
+      <label><span>Имя</span><input name="name" required placeholder="Как к вам обращаться"></label>
+      <label><span>Телефон или Telegram</span><input name="contact" required placeholder="Контакт для ответа"></label>
+      <label><span>Размер запястья</span><input name="wrist" placeholder="Например, 17 см"></label>
+      <label class="order-form__wide"><span>Пожелания</span><textarea name="message" rows="4" placeholder="Камни, цвета, смысл, бюджет"></textarea></label>
+      <button class="button button--gold order-form__wide" type="submit">Сохранить заявку</button>
+      <p class="form-status order-form__wide" id="orderFormStatus"></p>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

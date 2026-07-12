@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0b0a">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Litops Atelier — демо-панель администратора</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Prata&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <div class="admin-shell">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <a class="admin-brand" href="index.html" aria-label="Вернуться в магазин">
+        <img src="assets/brand/logo-light.png" alt="Litops Atelier">
+      </a>
+
+      <nav class="admin-nav" id="adminNav">
+        <button class="is-active" type="button" data-section="overview"><i data-lucide="layout-dashboard"></i><span>Обзор</span></button>
+        <button type="button" data-section="products"><i data-lucide="package"></i><span>Товары</span><em id="navProductCount">0</em></button>
+        <button type="button" data-section="orders"><i data-lucide="inbox"></i><span>Заявки</span><em id="navOrderCount">0</em></button>
+        <button type="button" data-section="settings"><i data-lucide="settings-2"></i><span>Настройки</span></button>
+      </nav>
+
+      <div class="sidebar-note">
+        <i data-lucide="hard-drive"></i>
+        <div>
+          <strong>Локальный режим</strong>
+          <p>Изменения хранятся только в этом браузере.</p>
+        </div>
+      </div>
+
+      <a class="store-link" href="index.html"><i data-lucide="store"></i> Открыть магазин</a>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-header">
+        <div class="admin-header__left">
+          <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Открыть меню"><i data-lucide="menu"></i></button>
+          <div>
+            <p>Litops Atelier</p>
+            <h1 id="pageTitle">Обзор</h1>
+          </div>
+        </div>
+        <div class="admin-header__actions">
+          <button class="header-action" id="exportButton" type="button"><i data-lucide="download"></i><span>Экспорт</span></button>
+          <label class="header-action file-action"><i data-lucide="upload"></i><span>Импорт</span><input id="importInput" type="file" accept="application/json"></label>
+          <div class="admin-profile"><span>LA</span><div><b>Litops Atelier</b><small>Администратор</small></div></div>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <section class="admin-section is-active" id="section-overview" data-section-panel="overview">
+          <div class="welcome-card">
+            <div>
+              <p class="eyebrow">Демо-режим GitHub Pages</p>
+              <h2>Управляйте витриной без редактирования кода</h2>
+              <p>Изменения товаров, цен и остатков сразу появятся на главной странице в этом же браузере.</p>
+            </div>
+            <button class="primary-button" type="button" data-go-section="products"><i data-lucide="plus"></i> Добавить товар</button>
+          </div>
+
+          <div class="metric-grid">
+            <article class="metric-card"><span class="metric-icon"><i data-lucide="package"></i></span><div><p>Товаров в каталоге</p><strong id="metricProducts">0</strong><small>активные позиции</small></div></article>
+            <article class="metric-card"><span class="metric-icon"><i data-lucide="russian-ruble"></i></span><div><p>Стоимость каталога</p><strong id="metricValue">0 ₽</strong><small>по одной единице</small></div></article>
+            <article class="metric-card"><span class="metric-icon"><i data-lucide="boxes"></i></span><div><p>Общий остаток</p><strong id="metricStock">0</strong><small>изделий в наличии</small></div></article>
+            <article class="metric-card"><span class="metric-icon"><i data-lucide="inbox"></i></span><div><p>Новые заявки</p><strong id="metricOrders">0</strong><small>требуют ответа</small></div></article>
+          </div>
+
+          <div class="overview-grid">
+            <article class="panel chart-panel">
+              <div class="panel-heading"><div><p class="eyebrow">Динамика</p><h2>Условная аналитика</h2></div><span>30 дней</span></div>
+              <div class="demo-chart" aria-label="Демонстрационный график">
+                <div class="chart-bars"><i style="--h:28%"></i><i style="--h:42%"></i><i style="--h:35%"></i><i style="--h:61%"></i><i style="--h:48%"></i><i style="--h:76%"></i><i style="--h:68%"></i><i style="--h:88%"></i><i style="--h:79%"></i><i style="--h:94%"></i></div>
+                <div class="chart-axis"><span>1 июл</span><span>10 июл</span><span>20 июл</span><span>30 июл</span></div>
+              </div>
+              <p class="chart-disclaimer">График демонстрационный. Для реальной аналитики потребуется подключение базы данных и системы учёта заказов.</p>
+            </article>
+
+            <article class="panel recent-panel">
+              <div class="panel-heading"><div><p class="eyebrow">Последнее</p><h2>Недавние товары</h2></div><button type="button" data-go-section="products">Все товары</button></div>
+              <div id="recentProducts" class="recent-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-section" id="section-products" data-section-panel="products">
+          <div class="section-toolbar">
+            <div>
+              <p class="eyebrow">Каталог</p>
+              <h2>Управление товарами</h2>
+            </div>
+            <div class="section-toolbar__actions">
+              <label class="admin-search"><i data-lucide="search"></i><input id="productSearch" type="search" placeholder="Поиск по каталогу"></label>
+              <button class="primary-button" id="addProductButton" type="button"><i data-lucide="plus"></i> Новый товар</button>
+            </div>
+          </div>
+
+          <div class="table-panel">
+            <div class="product-table-wrap">
+              <table class="product-table">
+                <thead><tr><th>Товар</th><th>Цена</th><th>Остаток</th><th>Категории</th><th>Статус</th><th></th></tr></thead>
+                <tbody id="productTableBody"></tbody>
+              </table>
+            </div>
+            <div class="table-empty" id="productTableEmpty" hidden><i data-lucide="package-search"></i><p>Товары не найдены.</p></div>
+          </div>
+        </section>
+
+        <section class="admin-section" id="section-orders" data-section-panel="orders">
+          <div class="section-toolbar">
+            <div><p class="eyebrow">Клиенты</p><h2>Заявки на индивидуальный заказ</h2></div>
+            <button class="secondary-button" id="clearOrdersButton" type="button"><i data-lucide="trash-2"></i> Очистить заявки</button>
+          </div>
+          <div class="order-list" id="orderList"></div>
+          <div class="table-empty" id="orderEmpty" hidden><i data-lucide="inbox"></i><p>Заявок пока нет. Создайте тестовую заявку на главной странице.</p></div>
+        </section>
+
+        <section class="admin-section" id="section-settings" data-section-panel="settings">
+          <div class="section-toolbar"><div><p class="eyebrow">Система</p><h2>Настройки демо-магазина</h2></div></div>
+          <div class="settings-grid">
+            <article class="panel settings-card">
+              <i data-lucide="database-backup"></i>
+              <h3>Сброс каталога</h3>
+              <p>Вернуть исходные шесть товаров, цены, описания и остатки.</p>
+              <button class="secondary-button danger-button" id="resetCatalogButton" type="button">Восстановить исходные данные</button>
+            </article>
+            <article class="panel settings-card">
+              <i data-lucide="file-json"></i>
+              <h3>Резервная копия</h3>
+              <p>Экспортируйте каталог и заявки в JSON, чтобы перенести данные в другой браузер.</p>
+              <button class="secondary-button" id="settingsExportButton" type="button">Скачать JSON</button>
+            </article>
+            <article class="panel settings-card settings-card--wide">
+              <i data-lucide="triangle-alert"></i>
+              <h3>Ограничение GitHub Pages</h3>
+              <p>Эта панель работает на <b>localStorage</b>: данные не синхронизируются между устройствами и недоступны покупателям. Для полноценного магазина с авторизацией, оплатой, общей базой заказов и загрузкой изображений потребуется backend — например, Supabase, Firebase или отдельный сервер.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="editor-dialog" id="productEditor">
+    <button class="dialog-close" id="editorClose" type="button" aria-label="Закрыть"><i data-lucide="x"></i></button>
+    <div class="editor-heading">
+      <p class="eyebrow">Карточка товара</p>
+      <h2 id="editorTitle">Новый товар</h2>
+      <p>Путь к изображению должен существовать в репозитории или быть публичным URL.</p>
+    </div>
+    <form id="productForm" class="product-form">
+      <input type="hidden" name="originalId">
+      <label><span>ID товара</span><input name="id" required placeholder="new-product" pattern="[a-z0-9-]+"></label>
+      <label><span>Название</span><input name="name" required placeholder="Название камня"></label>
+      <label><span>Цена, ₽</span><input name="price" type="number" min="0" step="10" required></label>
+      <label><span>Остаток</span><input name="stock" type="number" min="0" step="1" required></label>
+      <label class="form-wide"><span>Материал</span><input name="material" required placeholder="Натуральный камень · серебро 925"></label>
+      <label class="form-wide"><span>Описание</span><textarea name="description" rows="4" required></textarea></label>
+      <label class="form-wide"><span>Изображение</span><input name="image" required placeholder="assets/products/example.webp"></label>
+      <label><span>Бейдж</span><input name="badge" placeholder="Новинка"></label>
+      <label class="checkbox-label"><input name="featured" type="checkbox"><span>Показывать как избранный товар</span></label>
+      <fieldset class="form-wide category-fieldset">
+        <legend>Категории</legend>
+        <label><input type="checkbox" name="categories" value="light"> Светлые камни</label>
+        <label><input type="checkbox" name="categories" value="color"> Цветные</label>
+        <label><input type="checkbox" name="categories" value="rare"> Редкие минералы</label>
+        <label><input type="checkbox" name="categories" value="silver"> Серебро 925</label>
+        <label><input type="checkbox" name="categories" value="gift"> Для подарка</label>
+      </fieldset>
+      <div class="editor-actions form-wide">
+        <button class="secondary-button" id="editorCancel" type="button">Отмена</button>
+        <button class="primary-button" type="submit">Сохранить товар</button>
+      </div>
+      <p class="editor-status form-wide" id="editorStatus"></p>
+    </form>
+  </dialog>
+
+  <div class="confirm-modal" id="confirmModal" aria-hidden="true">
+    <div class="confirm-card">
+      <i data-lucide="triangle-alert"></i>
+      <h2 id="confirmTitle">Подтвердите действие</h2>
+      <p id="confirmText"></p>
+      <div><button class="secondary-button" id="confirmCancel" type="button">Отмена</button><button class="primary-button danger-button" id="confirmAccept" type="button">Подтвердить</button></div>
+    </div>
+  </div>
+
+  <div class="admin-toast" id="adminToast" role="status" aria-live="polite"></div>
+</body>
+</html>

@@ -154,7 +154,7 @@
     <div class="editor-heading">
       <p class="eyebrow">Карточка товара</p>
       <h2 id="editorTitle">Новый товар</h2>
-      <p>Путь к изображению должен существовать в репозитории или быть публичным URL.</p>
+      <p>Фотографии можно перетащить в форму. В статической демо-версии они сохраняются в браузере как локальные данные.</p>
     </div>
     <form id="productForm" class="product-form">
       <input type="hidden" name="originalId">
@@ -162,17 +162,40 @@
       <label><span>Название</span><input name="name" required placeholder="Название камня"></label>
       <label><span>Цена, ₽</span><input name="price" type="number" min="0" step="10" required></label>
       <label><span>Остаток</span><input name="stock" type="number" min="0" step="1" required></label>
-      <label class="form-wide"><span>Материал</span><input name="material" required placeholder="Натуральный камень · серебро 925"></label>
-      <label class="form-wide"><span>Описание</span><textarea name="description" rows="4" required></textarea></label>
-      <label class="form-wide"><span>Изображение</span><input name="image" required placeholder="assets/products/example.webp"></label>
+      <label class="form-wide"><span>Материал камня</span><input name="material" required placeholder="Натуральный пренит"></label>
+      <label><span>Цвет</span><input name="color" required placeholder="Светло-зелёный"></label>
+      <label><span>Материал фурнитуры</span><input name="hardwareMaterial" required value="Нержавеющая сталь высокого качества"></label>
+      <label><span>Страна изготовления браслета</span><input name="braceletCountry" required value="Россия"></label>
+      <label><span>Страна происхождения камня</span><input name="stoneCountry" required placeholder="Например, Бразилия"></label>
+      <label class="checkbox-label"><input name="hasClasp" type="checkbox"><span>В браслете есть замок</span></label>
+      <label class="form-wide"><span>Описание</span><textarea name="description" rows="5" required placeholder="Подробно опишите камень, дизайн и особенности изделия"></textarea></label>
+      <div class="form-wide upload-field">
+        <span>Фотографии товара</span>
+        <div class="drop-zone" id="imageDropZone" tabindex="0" role="button" aria-label="Перетащите фотографии или выберите файлы">
+          <i data-lucide="image-up"></i>
+          <strong>Перетащите фотографии сюда</strong>
+          <small>или нажмите для выбора · JPG, PNG, WEBP · до 3 МБ на файл</small>
+          <input id="imageFileInput" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden>
+        </div>
+        <div class="upload-preview" id="imagePreview"></div>
+        <label class="image-url-label"><span>Или путь / публичный URL главного фото</span><input name="image" required placeholder="assets/products/example.webp"></label>
+        <input name="gallery" type="hidden">
+      </div>
       <label><span>Бейдж</span><input name="badge" placeholder="Новинка"></label>
       <label class="checkbox-label"><input name="featured" type="checkbox"><span>Показывать как избранный товар</span></label>
+      <fieldset class="form-wide category-fieldset">
+        <legend>Комплектация</legend>
+        <label><input type="checkbox" name="packageContents" value="Бирка"> Бирка</label>
+        <label><input type="checkbox" name="packageContents" value="Мешочек для хранения"> Мешочек для хранения</label>
+        <label><input type="checkbox" name="packageContents" value="Подарочная упаковка"> Подарочная упаковка</label>
+        <label><input type="checkbox" name="packageContents" value="Браслет"> Браслет</label>
+      </fieldset>
       <fieldset class="form-wide category-fieldset">
         <legend>Категории</legend>
         <label><input type="checkbox" name="categories" value="light"> Светлые камни</label>
         <label><input type="checkbox" name="categories" value="color"> Цветные</label>
         <label><input type="checkbox" name="categories" value="rare"> Редкие минералы</label>
-        <label><input type="checkbox" name="categories" value="silver"> Серебро 925</label>
+        <label><input type="checkbox" name="categories" value="steel"> Нержавеющая сталь</label>
         <label><input type="checkbox" name="categories" value="gift"> Для подарка</label>
       </fieldset>
       <div class="editor-actions form-wide">

@@ -14,74 +14,74 @@ const DEFAULT_PRODUCTS = [
   {
     id: "prehnite",
     name: "Пренит",
-    material: "Натуральный пренит · серебро 925",
+    material: "Натуральный пренит · нержавеющая сталь",
     description: "Полупрозрачный зелёный минерал с мягким природным свечением. Спокойный акцент для повседневных образов.",
     price: 5490,
     image: "assets/products/prehnite.webp",
-    categories: ["light", "rare", "silver", "gift"],
+    categories: ["light", "rare", "steel", "gift"],
     badge: "Выбор мастера",
     stock: 8,
-    featured: true
+    featured: true, color: "Светло-зелёный", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Китай", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: []
   },
   {
     id: "tourmaline",
     name: "Турмалин",
-    material: "Натуральный турмалин · серебро 925",
+    material: "Натуральный турмалин · нержавеющая сталь",
     description: "Живое сочетание розовых, зелёных и золотистых оттенков. Каждый браслет имеет уникальную палитру.",
     price: 4890,
     image: "assets/products/tourmaline.webp",
-    categories: ["color", "rare", "silver", "gift"],
+    categories: ["color", "rare", "steel", "gift"],
     badge: "Новинка",
     stock: 6,
-    featured: true
+    featured: true, color: "Мультиколор", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Бразилия", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: []
   },
   {
     id: "rutilated-quartz",
     name: "Кварц рутиловый",
-    material: "Натуральный кварц · серебро 925",
+    material: "Натуральный кварц · нержавеющая сталь",
     description: "Прозрачный кварц с золотистыми иглами рутила. Выразительная фактура, созданная самой природой.",
     price: 4690,
     image: "assets/products/rutilated-quartz.webp",
-    categories: ["light", "rare", "silver", "gift"],
+    categories: ["light", "rare", "steel", "gift"],
     badge: "Редкий камень",
     stock: 5,
-    featured: true
+    featured: true, color: "Золотисто-прозрачный", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Бразилия", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: []
   },
   {
     id: "larimar",
     name: "Ларимар",
-    material: "Натуральный ларимар · серебро 925",
+    material: "Натуральный ларимар · нержавеющая сталь",
     description: "Небесно-голубой минерал с облачным рисунком. Лёгкий и чистый оттенок для спокойных сочетаний.",
     price: 6290,
     image: "assets/products/larimar.webp",
-    categories: ["light", "color", "rare", "silver", "gift"],
+    categories: ["light", "color", "rare", "steel", "gift"],
     badge: "Хит",
     stock: 4,
-    featured: true
+    featured: true, color: "Небесно-голубой", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Доминиканская Республика", packageContents: ["Бирка", "Мешочек для хранения", "Подарочная упаковка", "Браслет"], gallery: []
   },
   {
     id: "labradorite",
     name: "Лабрадор",
-    material: "Натуральный лабрадорит · серебро 925",
+    material: "Натуральный лабрадорит · нержавеющая сталь",
     description: "Серый камень с синими, зелёными и золотистыми переливами, которые раскрываются при движении.",
     price: 6790,
     image: "assets/products/labradorite.webp",
-    categories: ["color", "rare", "silver", "gift"],
+    categories: ["color", "rare", "steel", "gift"],
     badge: "Бестселлер",
     stock: 7,
-    featured: true
+    featured: true, color: "Серо-синий", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Мадагаскар", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: []
   },
   {
     id: "charoite",
     name: "Чароит",
-    material: "Натуральный чароит · серебро 925",
+    material: "Натуральный чароит · нержавеющая сталь",
     description: "Глубокий фиолетовый минерал с волокнистым рисунком. Яркий самостоятельный акцент.",
     price: 5990,
     image: "assets/products/charoite.webp",
-    categories: ["color", "rare", "silver", "gift"],
+    categories: ["color", "rare", "steel", "gift"],
     badge: "Новинка",
     stock: 5,
-    featured: true
+    featured: true, color: "Фиолетовый", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Россия", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: []
   }
 ];
 
@@ -140,7 +140,7 @@ function cacheElements() {
     "searchInput", "searchResults", "searchClose", "productDialog", "dialogClose", "dialogImage", "dialogName",
     "dialogMaterial", "dialogDescription", "dialogPrice", "dialogAddToCart", "customOrderButton", "orderDialog",
     "orderDialogClose", "customOrderForm", "orderFormStatus", "newsletterForm", "newsletterMessage", "toast",
-    "featuredName", "featuredPrice", "featuredImage", "heroImage"
+    "featuredName", "featuredPrice", "featuredImage", "heroImage", "dialogFacts", "dialogSpecs"
   ].forEach(id => { els[id] = document.getElementById(id); });
 }
 
@@ -157,10 +157,17 @@ function normalizeProducts() {
     description: product.description || "Браслет ручной работы Litops Atelier.",
     price: Number(product.price) || 0,
     image: product.image || "assets/products/prehnite.webp",
-    categories: Array.isArray(product.categories) ? product.categories : ["silver", "gift"],
+    categories: Array.isArray(product.categories) ? product.categories : ["steel", "gift"],
     badge: product.badge || "Ручная работа",
     stock: Math.max(0, Number(product.stock) || 0),
-    featured: Boolean(product.featured)
+    featured: Boolean(product.featured),
+    color: product.color || "Не указан",
+    hardwareMaterial: product.hardwareMaterial || "Нержавеющая сталь высокого качества",
+    hasClasp: Boolean(product.hasClasp),
+    braceletCountry: product.braceletCountry || "Россия",
+    stoneCountry: product.stoneCountry || "Не указана",
+    packageContents: Array.isArray(product.packageContents) ? product.packageContents : ["Бирка", "Мешочек для хранения", "Браслет"],
+    gallery: Array.isArray(product.gallery) ? product.gallery : []
   }));
 }
 
@@ -390,6 +397,20 @@ function openProductDialog(id) {
   els.dialogDescription.textContent = product.description;
   els.dialogPrice.textContent = formatPrice(product.price);
   els.dialogAddToCart.dataset.productId = product.id;
+  const facts = [
+    ["palette", `Цвет: ${product.color}`],
+    ["badge-check", product.hardwareMaterial],
+    [product.hasClasp ? "lock-keyhole" : "circle-slash", product.hasClasp ? "С замком" : "Без замка"],
+    ["package-check", product.packageContents.join(", ")]
+  ];
+  els.dialogFacts.innerHTML = facts.map(([icon, text]) => `<span><i data-lucide="${icon}"></i> ${escapeHtml(text)}</span>`).join("");
+  const specs = [
+    ["Страна изготовления браслета", product.braceletCountry],
+    ["Страна происхождения камня", product.stoneCountry],
+    ["Материал фурнитуры", product.hardwareMaterial],
+    ["Комплектация", product.packageContents.join(", ")]
+  ];
+  els.dialogSpecs.innerHTML = specs.map(([term, value]) => `<div><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("");
   els.productDialog.showModal();
   refreshIcons();
 }
@@ -601,6 +622,11 @@ function bindEvents() {
 }
 
 function init() {
+  const announcementTrack = document.querySelector(".announcement__track");
+  if (announcementTrack && !announcementTrack.dataset.loopReady) {
+    announcementTrack.innerHTML += announcementTrack.innerHTML;
+    announcementTrack.dataset.loopReady = "true";
+  }
   cacheElements();
   normalizeProducts();
   renderProducts();

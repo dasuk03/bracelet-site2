@@ -2469,3 +2469,16 @@ h3 {
     transform: none;
   }
 }
+
+/* === Обновление: бесконечная бегущая строка === */
+.announcement { overflow: hidden; white-space: nowrap; }
+.announcement__track { width: max-content; display: flex; align-items: center; gap: 54px; animation: announcement-marquee 24s linear infinite; will-change: transform; }
+.announcement__track:hover { animation-play-state: paused; }
+.announcement__track span { flex: 0 0 auto; }
+@keyframes announcement-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.product-specs { margin: 18px 0 0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+.product-specs div { padding:11px 12px; border:1px solid var(--line-soft); border-radius:12px; background:rgba(255,255,255,.02); }
+.product-specs dt { color:var(--muted); font-size:10px; margin-bottom:4px; }
+.product-specs dd { margin:0; color:var(--cream); font-size:12px; line-height:1.45; }
+@media(max-width:620px){.announcement__track{animation-duration:18s}.product-specs{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.announcement__track{animation:none}}

@@ -7,19 +7,19 @@ const STORAGE_KEYS = {
 };
 
 const DEFAULT_PRODUCTS = [
-  { id: "prehnite", name: "Пренит", material: "Натуральный пренит · серебро 925", description: "Полупрозрачный зелёный минерал с мягким природным свечением. Спокойный акцент для повседневных образов.", price: 5490, image: "assets/products/prehnite.webp", categories: ["light", "rare", "silver", "gift"], badge: "Выбор мастера", stock: 8, featured: true },
-  { id: "tourmaline", name: "Турмалин", material: "Натуральный турмалин · серебро 925", description: "Живое сочетание розовых, зелёных и золотистых оттенков. Каждый браслет имеет уникальную палитру.", price: 4890, image: "assets/products/tourmaline.webp", categories: ["color", "rare", "silver", "gift"], badge: "Новинка", stock: 6, featured: true },
-  { id: "rutilated-quartz", name: "Кварц рутиловый", material: "Натуральный кварц · серебро 925", description: "Прозрачный кварц с золотистыми иглами рутила. Выразительная фактура, созданная самой природой.", price: 4690, image: "assets/products/rutilated-quartz.webp", categories: ["light", "rare", "silver", "gift"], badge: "Редкий камень", stock: 5, featured: true },
-  { id: "larimar", name: "Ларимар", material: "Натуральный ларимар · серебро 925", description: "Небесно-голубой минерал с облачным рисунком. Лёгкий и чистый оттенок для спокойных сочетаний.", price: 6290, image: "assets/products/larimar.webp", categories: ["light", "color", "rare", "silver", "gift"], badge: "Хит", stock: 4, featured: true },
-  { id: "labradorite", name: "Лабрадор", material: "Натуральный лабрадорит · серебро 925", description: "Серый камень с синими, зелёными и золотистыми переливами, которые раскрываются при движении.", price: 6790, image: "assets/products/labradorite.webp", categories: ["color", "rare", "silver", "gift"], badge: "Бестселлер", stock: 7, featured: true },
-  { id: "charoite", name: "Чароит", material: "Натуральный чароит · серебро 925", description: "Глубокий фиолетовый минерал с волокнистым рисунком. Яркий самостоятельный акцент.", price: 5990, image: "assets/products/charoite.webp", categories: ["color", "rare", "silver", "gift"], badge: "Новинка", stock: 5, featured: true }
+  { id: "prehnite", name: "Пренит", material: "Натуральный пренит · нержавеющая сталь", description: "Полупрозрачный зелёный минерал с мягким природным свечением. Спокойный акцент для повседневных образов.", price: 5490, image: "assets/products/prehnite.webp", categories: ["light", "rare", "steel", "gift"], badge: "Выбор мастера", stock: 8, featured: true, color: "Светло-зелёный", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Китай", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: [] },
+  { id: "tourmaline", name: "Турмалин", material: "Натуральный турмалин · нержавеющая сталь", description: "Живое сочетание розовых, зелёных и золотистых оттенков. Каждый браслет имеет уникальную палитру.", price: 4890, image: "assets/products/tourmaline.webp", categories: ["color", "rare", "steel", "gift"], badge: "Новинка", stock: 6, featured: true, color: "Мультиколор", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Бразилия", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: [] },
+  { id: "rutilated-quartz", name: "Кварц рутиловый", material: "Натуральный кварц · нержавеющая сталь", description: "Прозрачный кварц с золотистыми иглами рутила. Выразительная фактура, созданная самой природой.", price: 4690, image: "assets/products/rutilated-quartz.webp", categories: ["light", "rare", "steel", "gift"], badge: "Редкий камень", stock: 5, featured: true, color: "Золотисто-прозрачный", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Бразилия", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: [] },
+  { id: "larimar", name: "Ларимар", material: "Натуральный ларимар · нержавеющая сталь", description: "Небесно-голубой минерал с облачным рисунком. Лёгкий и чистый оттенок для спокойных сочетаний.", price: 6290, image: "assets/products/larimar.webp", categories: ["light", "color", "rare", "steel", "gift"], badge: "Хит", stock: 4, featured: true, color: "Небесно-голубой", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Доминиканская Республика", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: [] },
+  { id: "labradorite", name: "Лабрадор", material: "Натуральный лабрадорит · нержавеющая сталь", description: "Серый камень с синими, зелёными и золотистыми переливами, которые раскрываются при движении.", price: 6790, image: "assets/products/labradorite.webp", categories: ["color", "rare", "steel", "gift"], badge: "Бестселлер", stock: 7, featured: true, color: "Серо-синий", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Мадагаскар", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: [] },
+  { id: "charoite", name: "Чароит", material: "Натуральный чароит · нержавеющая сталь", description: "Глубокий фиолетовый минерал с волокнистым рисунком. Яркий самостоятельный акцент.", price: 5990, image: "assets/products/charoite.webp", categories: ["color", "rare", "steel", "gift"], badge: "Новинка", stock: 5, featured: true, color: "Фиолетовый", hardwareMaterial: "Нержавеющая сталь высокого качества", hasClasp: false, braceletCountry: "Россия", stoneCountry: "Россия", packageContents: ["Бирка", "Мешочек для хранения", "Браслет"], gallery: [] }
 ];
 
 const CATEGORY_LABELS = {
   light: "Светлые",
   color: "Цветные",
   rare: "Редкие",
-  silver: "Серебро 925",
+  steel: "Нержавеющая сталь",
   gift: "Подарок"
 };
 
@@ -28,7 +28,8 @@ const state = {
   orders: loadJson(STORAGE_KEYS.orders, []),
   productSearch: "",
   currentSection: "overview",
-  confirmAction: null
+  confirmAction: null,
+  editorImages: []
 };
 
 const els = {};
@@ -71,7 +72,7 @@ function cacheElements() {
     "metricValue", "metricStock", "metricOrders", "recentProducts", "productTableBody", "productTableEmpty",
     "productSearch", "addProductButton", "orderList", "orderEmpty", "clearOrdersButton", "resetCatalogButton",
     "exportButton", "settingsExportButton", "importInput", "productEditor", "editorClose", "editorCancel", "editorTitle",
-    "productForm", "editorStatus", "confirmModal", "confirmTitle", "confirmText", "confirmCancel", "confirmAccept", "adminToast"
+    "productForm", "editorStatus", "imageDropZone", "imageFileInput", "imagePreview", "confirmModal", "confirmTitle", "confirmText", "confirmCancel", "confirmAccept", "adminToast"
   ].forEach(id => { els[id] = document.getElementById(id); });
 }
 
@@ -88,8 +89,15 @@ function normalizeState() {
     stock: Math.max(0, Number(product.stock) || 0),
     image: product.image || "assets/products/prehnite.webp",
     badge: product.badge || "Ручная работа",
-    categories: Array.isArray(product.categories) ? product.categories.filter(item => CATEGORY_LABELS[item]) : ["silver", "gift"],
-    featured: Boolean(product.featured)
+    categories: Array.isArray(product.categories) ? product.categories.filter(item => CATEGORY_LABELS[item]) : ["steel", "gift"],
+    featured: Boolean(product.featured),
+    color: product.color || "Не указан",
+    hardwareMaterial: product.hardwareMaterial || "Нержавеющая сталь высокого качества",
+    hasClasp: Boolean(product.hasClasp),
+    braceletCountry: product.braceletCountry || "Россия",
+    stoneCountry: product.stoneCountry || "Не указана",
+    packageContents: Array.isArray(product.packageContents) ? product.packageContents : ["Бирка", "Мешочек для хранения", "Браслет"],
+    gallery: Array.isArray(product.gallery) ? product.gallery : []
   }));
 
   saveJson(STORAGE_KEYS.products, state.products);
@@ -215,19 +223,34 @@ function openProductEditor(product = null) {
     form.elements.image.value = product.image;
     form.elements.badge.value = product.badge;
     form.elements.featured.checked = product.featured;
+    form.elements.color.value = product.color;
+    form.elements.hardwareMaterial.value = product.hardwareMaterial;
+    form.elements.hasClasp.checked = product.hasClasp;
+    form.elements.braceletCountry.value = product.braceletCountry;
+    form.elements.stoneCountry.value = product.stoneCountry;
+    state.editorImages = [product.image, ...(product.gallery || [])].filter(Boolean);
+    form.elements.gallery.value = JSON.stringify(product.gallery || []);
+    form.querySelectorAll('input[name="packageContents"]').forEach(input => { input.checked = product.packageContents.includes(input.value); });
     form.querySelectorAll('input[name="categories"]').forEach(input => { input.checked = product.categories.includes(input.value); });
   } else {
     els.editorTitle.textContent = "Новый товар";
     form.elements.originalId.value = "";
     form.elements.stock.value = 1;
     form.elements.price.value = 4990;
-    form.elements.material.value = "Натуральный камень · серебро 925";
+    form.elements.material.value = "Натуральный камень";
     form.elements.badge.value = "Новинка";
     form.elements.image.value = "assets/products/prehnite.webp";
-    form.querySelector('input[name="categories"][value="silver"]').checked = true;
+    form.elements.color.value = "";
+    form.elements.hardwareMaterial.value = "Нержавеющая сталь высокого качества";
+    form.elements.braceletCountry.value = "Россия";
+    form.elements.stoneCountry.value = "";
+    state.editorImages = [form.elements.image.value];
+    form.querySelectorAll('input[name="packageContents"]').forEach(input => { input.checked = ["Бирка", "Мешочек для хранения", "Браслет"].includes(input.value); });
+    form.querySelector('input[name="categories"][value="steel"]').checked = true;
     form.querySelector('input[name="categories"][value="gift"]').checked = true;
   }
 
+  renderImagePreview();
   els.productEditor.showModal();
   refreshIcons();
 }
@@ -258,10 +281,17 @@ function saveProductFromForm(event) {
     stock: Math.max(0, Number(data.get("stock")) || 0),
     material: data.get("material").trim(),
     description: data.get("description").trim(),
-    image: data.get("image").trim(),
+    image: state.editorImages[0] || data.get("image").trim(),
     badge: data.get("badge").trim() || "Ручная работа",
     featured: data.get("featured") === "on",
-    categories: categories.length ? categories : ["silver", "gift"]
+    categories: categories.length ? categories : ["steel", "gift"],
+    color: data.get("color").trim(),
+    hardwareMaterial: data.get("hardwareMaterial").trim(),
+    hasClasp: data.get("hasClasp") === "on",
+    braceletCountry: data.get("braceletCountry").trim(),
+    stoneCountry: data.get("stoneCountry").trim(),
+    packageContents: data.getAll("packageContents"),
+    gallery: state.editorImages.slice(1)
   };
 
   const index = state.products.findIndex(item => item.id === originalId);
@@ -393,6 +423,30 @@ function renderAll() {
   refreshIcons();
 }
 
+function renderImagePreview() {
+  if (!els.imagePreview) return;
+  els.imagePreview.innerHTML = state.editorImages.map((src, index) => `
+    <div class="upload-preview__item" data-image-index="${index}">
+      <img src="${escapeHtml(src)}" alt="Фото товара ${index + 1}">
+      <button type="button" data-remove-image aria-label="Удалить фото"><i data-lucide="x"></i></button>
+    </div>`).join("");
+  const form = els.productForm;
+  if (state.editorImages[0]) form.elements.image.value = state.editorImages[0];
+  form.elements.gallery.value = JSON.stringify(state.editorImages.slice(1));
+  refreshIcons();
+}
+
+async function filesToDataUrls(files) {
+  const accepted = [...files].filter(file => ["image/jpeg","image/png","image/webp"].includes(file.type) && file.size <= 3 * 1024 * 1024);
+  if (!accepted.length) { showToast("Выберите JPG, PNG или WEBP до 3 МБ"); return; }
+  const urls = await Promise.all(accepted.map(file => new Promise((resolve, reject) => {
+    const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file);
+  })));
+  state.editorImages.push(...urls);
+  renderImagePreview();
+  showToast(`Добавлено фотографий: ${urls.length}`);
+}
+
 function bindEvents() {
   els.sidebarToggle.addEventListener("click", () => els.adminSidebar.classList.toggle("is-open"));
 
@@ -426,6 +480,17 @@ function bindEvents() {
   els.editorCancel.addEventListener("click", () => els.productEditor.close());
   els.productEditor.addEventListener("click", event => { if (event.target === event.currentTarget) event.currentTarget.close(); });
   els.productForm.addEventListener("submit", saveProductFromForm);
+  els.imageDropZone.addEventListener("click", () => els.imageFileInput.click());
+  els.imageDropZone.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") els.imageFileInput.click(); });
+  els.imageFileInput.addEventListener("change", event => filesToDataUrls(event.target.files));
+  ["dragenter", "dragover"].forEach(type => els.imageDropZone.addEventListener(type, event => { event.preventDefault(); els.imageDropZone.classList.add("is-dragging"); }));
+  ["dragleave", "drop"].forEach(type => els.imageDropZone.addEventListener(type, event => { event.preventDefault(); els.imageDropZone.classList.remove("is-dragging"); }));
+  els.imageDropZone.addEventListener("drop", event => filesToDataUrls(event.dataTransfer.files));
+  els.imagePreview.addEventListener("click", event => {
+    const button = event.target.closest("[data-remove-image]"); if (!button) return;
+    const index = Number(button.closest("[data-image-index]").dataset.imageIndex);
+    state.editorImages.splice(index, 1); renderImagePreview();
+  });
 
   els.orderList.addEventListener("change", event => {
     const card = event.target.closest("[data-order-id]");

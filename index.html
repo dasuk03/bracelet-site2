@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090a09">
-  <meta name="description" content="Litops Atelier — браслеты ручной работы из натуральных камней и серебра 925.">
+  <meta name="description" content="Litops Atelier — браслеты ручной работы из натуральных камней с фурнитурой из высококачественной нержавеющей стали.">
   <title>Litops Atelier — украшения ручной работы</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -71,7 +71,7 @@
         <div class="hero__copy reveal">
           <p class="eyebrow">Ручная работа · Натуральные материалы</p>
           <h1>Украшения, в которых чувствуется рука мастера</h1>
-          <p class="hero__lead">Браслеты из натуральных камней и серебра 925, собранные вручную с вниманием к природному рисунку каждого минерала.</p>
+          <p class="hero__lead">Браслеты из натуральных камней с фурнитурой из высококачественной нержавеющей стали, собранные вручную с вниманием к природному рисунку каждого минерала.</p>
           <div class="hero__actions">
             <a class="button button--gold" href="#catalog">Смотреть коллекцию <i data-lucide="arrow-right"></i></a>
             <a class="button button--outline" href="#custom">Индивидуальный заказ</a>
@@ -96,7 +96,7 @@
               </button>
             </div>
             <img id="featuredImage" src="assets/products/prehnite.webp" alt="Пренит">
-            <p class="featured-card__meta">Натуральный камень · серебро 925</p>
+            <p class="featured-card__meta">Натуральный камень · нержавеющая сталь</p>
             <h2 id="featuredName">Пренит</h2>
             <div class="featured-card__bottom">
               <strong id="featuredPrice">5 490 ₽</strong>
@@ -116,7 +116,7 @@
           <button class="category-chip" type="button" data-filter="light"><i data-lucide="sun-medium"></i> Светлые камни</button>
           <button class="category-chip" type="button" data-filter="color"><i data-lucide="palette"></i> Цветные</button>
           <button class="category-chip" type="button" data-filter="rare"><i data-lucide="sparkles"></i> Редкие минералы</button>
-          <button class="category-chip" type="button" data-filter="silver"><i data-lucide="circle-dot"></i> Серебро 925</button>
+          <button class="category-chip" type="button" data-filter="steel"><i data-lucide="circle-dot"></i> Нержавеющая сталь</button>
           <button class="category-chip" type="button" data-filter="gift"><i data-lucide="gift"></i> Для подарка</button>
         </div>
       </div>
@@ -168,7 +168,7 @@
           <h2>Почему выбирают нас</h2>
           <div class="why-grid">
             <div><i data-lucide="hand"></i><h3>Ручная работа</h3><p>Каждое изделие собирается мастером, а не конвейером.</p></div>
-            <div><i data-lucide="leaf"></i><h3>Натуральные материалы</h3><p>Камни с уникальным природным рисунком и серебро 925.</p></div>
+            <div><i data-lucide="leaf"></i><h3>Натуральные материалы</h3><p>Камни с уникальным природным рисунком и фурнитура из высококачественной нержавеющей стали.</p></div>
             <div><i data-lucide="wand-sparkles"></i><h3>Индивидуальный дизайн</h3><p>Сочетания под запястье, настроение и личную историю.</p></div>
             <div><i data-lucide="package-check"></i><h3>Премиальная упаковка</h3><p>Изделие готово стать подарком сразу после получения.</p></div>
           </div>
@@ -248,7 +248,7 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <img src="assets/brand/logo-light.png" alt="Litops Atelier">
-        <p>Украшения ручной работы из натуральных камней и серебра 925.</p>
+        <p>Украшения ручной работы из натуральных камней и высококачественной нержавеющей стали.</p>
         <div class="socials">
           <a href="https://www.wildberries.ru/seller/4489837" target="_blank" rel="noopener" aria-label="Магазин на Wildberries">WB</a>
           <a href="#" aria-label="Telegram"><i data-lucide="send"></i></a>
@@ -259,7 +259,7 @@
         <h3>Каталог</h3>
         <a href="#catalog">Все браслеты</a>
         <a href="#catalog">Натуральные камни</a>
-        <a href="#catalog">С серебром 925</a>
+        <a href="#catalog">С нержавеющей сталью</a>
         <a href="#custom">Индивидуальный заказ</a>
       </div>
       <div>
@@ -328,11 +328,8 @@
       <p class="eyebrow" id="dialogMaterial"></p>
       <h2 id="dialogName"></h2>
       <p id="dialogDescription"></p>
-      <div class="product-dialog__facts">
-        <span><i data-lucide="circle-ruler"></i> Регулируемый размер</span>
-        <span><i data-lucide="badge-check"></i> Серебро 925</span>
-        <span><i data-lucide="package-check"></i> Подарочная упаковка</span>
-      </div>
+      <div class="product-dialog__facts" id="dialogFacts"></div>
+      <dl class="product-specs" id="dialogSpecs"></dl>
       <div class="product-dialog__buy">
         <strong id="dialogPrice"></strong>
         <button class="button button--gold add-to-cart" id="dialogAddToCart" type="button">Добавить в корзину</button>

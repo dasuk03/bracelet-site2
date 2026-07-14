@@ -91,7 +91,8 @@ const state = {
   favorites: new Set(loadJson(STORAGE_KEYS.favorites, [])),
   filter: "all",
   sort: "featured",
-  search: ""
+  search: "",
+  advancedFilters: { priceMin: 0, priceMax: Infinity, colors: [], hardware: "all", clasp: "all" }
 };
 
 const els = {};
@@ -140,7 +141,11 @@ function cacheElements() {
     "searchInput", "searchResults", "searchClose", "productDialog", "dialogClose", "dialogImage", "dialogName",
     "dialogMaterial", "dialogDescription", "dialogPrice", "dialogAddToCart", "customOrderButton", "orderDialog",
     "orderDialogClose", "customOrderForm", "orderFormStatus", "newsletterForm", "newsletterMessage", "toast",
-    "featuredName", "featuredPrice", "featuredImage", "heroImage", "dialogFacts", "dialogSpecs"
+    "featuredName", "featuredPrice", "featuredImage", "heroImage", "dialogFacts", "dialogSpecs",
+    "filterOpenButton", "activeFilterCount", "filterDialog", "filterForm", "filterCloseButton",
+    "filterResetButton", "filterApplyButton", "filterResultCount", "averagePriceLabel", "selectedRangeLabel",
+    "priceMinRange", "priceMaxRange", "priceMinInput", "priceMaxInput", "rangeFill", "priceLine",
+    "priceAreaPath", "pricePoints"
   ].forEach(id => { els[id] = document.getElementById(id); });
 }
 
@@ -189,6 +194,16 @@ function getVisibleProducts() {
     );
   }
 
+  const filters = state.advancedFilters;
+  products = products.filter(product => {
+    if (product.price < filters.priceMin || product.price > filters.priceMax) return false;
+    if (filters.colors.length && !filters.colors.includes(getColorGroup(product.color))) return false;
+    if (filters.hardware === "steel" && !product.hardwareMaterial.toLocaleLowerCase("ru").includes("нержав")) return false;
+    if (filters.clasp === "yes" && !product.hasClasp) return false;
+    if (filters.clasp === "no" && product.hasClasp) return false;
+    return true;
+  });
+
   products.sort((a, b) => {
     switch (state.sort) {
       case "price-asc": return a.price - b.price;
@@ -200,6 +215,160 @@ function getVisibleProducts() {
   });
 
   return products;
+}
+
+
+function getPriceBounds() {
+  const prices = state.products.map(product => Number(product.price) || 0);
+  const minPrice = prices.length ? Math.min(...prices) : 0;
+  const maxPrice = prices.length ? Math.max(...prices) : 1000;
+  const min = Math.floor(minPrice / 100) * 100;
+  const max = Math.ceil(maxPrice / 100) * 100;
+  return { min, max: Math.max(max, min + 1000) };
+}
+
+function getColorGroup(color = "") {
+  const value = color.toLocaleLowerCase("ru");
+  if (/зел|олив|мят/.test(value)) return "green";
+  if (/голуб|син|бирюз/.test(value)) return "blue";
+  if (/фиолет|сирен/.test(value)) return "purple";
+  if (/золот|жёлт|прозрач/.test(value)) return "gold";
+  if (/мульти|разноцвет/.test(value)) return "multi";
+  return "dark";
+}
+
+const PRICE_GRAPH_BASE = [18, 28, 42, 62, 84, 104, 118, 128, 116, 98, 88, 72, 58, 48, 39, 31, 25, 20];
+let priceGraphFrame = 0;
+let currentGraphY = [];
+
+function graphPointsForRange(minValue, maxValue) {
+  const bounds = getPriceBounds();
+  const span = bounds.max - bounds.min || 1;
+  return PRICE_GRAPH_BASE.map((height, index) => {
+    const ratio = index / (PRICE_GRAPH_BASE.length - 1);
+    const price = bounds.min + ratio * span;
+    const selected = price >= minValue && price <= maxValue;
+    const edgeDistance = Math.min(Math.abs(price - minValue), Math.abs(price - maxValue)) / span;
+    const pulse = selected ? 1 + Math.max(0, .12 - edgeDistance) * 1.8 : .34;
+    return 140 - Math.min(126, height * pulse);
+  });
+}
+
+function drawPriceGraph(yValues) {
+  if (!els.priceLine || !els.priceAreaPath || !els.pricePoints) return;
+  const width = 600;
+  const step = width / (yValues.length - 1);
+  const points = yValues.map((y, index) => `${(index * step).toFixed(1)},${y.toFixed(1)}`).join(" ");
+  els.priceLine.setAttribute("points", points);
+  els.priceAreaPath.setAttribute("d", `M 0 145 L ${points.replaceAll(" ", " L ")} L 600 145 Z`);
+  els.pricePoints.innerHTML = yValues.map((y, index) => `<circle cx="${(index * step).toFixed(1)}" cy="${y.toFixed(1)}" r="${index % 2 ? 2.3 : 3.2}"></circle>`).join("");
+}
+
+function animatePriceGraph(minValue, maxValue) {
+  cancelAnimationFrame(priceGraphFrame);
+  const target = graphPointsForRange(minValue, maxValue);
+  if (!currentGraphY.length) currentGraphY = [...target];
+  const start = [...currentGraphY];
+  const startedAt = performance.now();
+  const duration = 380;
+  const tick = now => {
+    const t = Math.min(1, (now - startedAt) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    currentGraphY = start.map((value, index) => value + (target[index] - value) * eased);
+    drawPriceGraph(currentGraphY);
+    if (t < 1) priceGraphFrame = requestAnimationFrame(tick);
+  };
+  priceGraphFrame = requestAnimationFrame(tick);
+}
+
+function countAdvancedFilterResults(draft) {
+  return state.products.filter(product => {
+    if (product.price < draft.priceMin || product.price > draft.priceMax) return false;
+    if (draft.colors.length && !draft.colors.includes(getColorGroup(product.color))) return false;
+    if (draft.hardware === "steel" && !product.hardwareMaterial.toLocaleLowerCase("ru").includes("нержав")) return false;
+    if (draft.clasp === "yes" && !product.hasClasp) return false;
+    if (draft.clasp === "no" && product.hasClasp) return false;
+    return true;
+  }).length;
+}
+
+function readFilterDraft() {
+  return {
+    priceMin: Number(els.priceMinRange.value),
+    priceMax: Number(els.priceMaxRange.value),
+    colors: [...els.filterForm.querySelectorAll('input[name="color"]:checked')].map(input => input.value),
+    hardware: els.filterForm.querySelector('input[name="hardware"]:checked')?.value || "all",
+    clasp: els.filterForm.querySelector('input[name="clasp"]:checked')?.value || "all"
+  };
+}
+
+function updateFilterPreview(source = "range") {
+  const bounds = getPriceBounds();
+  let minValue = Number(source === "min-input" ? els.priceMinInput.value : els.priceMinRange.value);
+  let maxValue = Number(source === "max-input" ? els.priceMaxInput.value : els.priceMaxRange.value);
+  minValue = Math.max(bounds.min, Math.min(minValue || bounds.min, bounds.max - 100));
+  maxValue = Math.min(bounds.max, Math.max(maxValue || bounds.max, bounds.min + 100));
+  if (minValue > maxValue - 100) {
+    if (source.includes("min")) minValue = maxValue - 100;
+    else maxValue = minValue + 100;
+  }
+  els.priceMinRange.value = minValue;
+  els.priceMaxRange.value = maxValue;
+  els.priceMinInput.value = minValue;
+  els.priceMaxInput.value = maxValue;
+  const left = ((minValue - bounds.min) / (bounds.max - bounds.min)) * 100;
+  const right = 100 - ((maxValue - bounds.min) / (bounds.max - bounds.min)) * 100;
+  els.rangeFill.style.left = `${left}%`;
+  els.rangeFill.style.right = `${right}%`;
+  els.selectedRangeLabel.textContent = `${formatPrice(minValue)} — ${formatPrice(maxValue)}`;
+  const draft = readFilterDraft();
+  els.filterResultCount.textContent = countAdvancedFilterResults(draft);
+  animatePriceGraph(minValue, maxValue);
+}
+
+function syncFilterFormFromState() {
+  const bounds = getPriceBounds();
+  const minValue = Number.isFinite(state.advancedFilters.priceMin) ? state.advancedFilters.priceMin : bounds.min;
+  const maxValue = Number.isFinite(state.advancedFilters.priceMax) ? state.advancedFilters.priceMax : bounds.max;
+  [els.priceMinRange, els.priceMaxRange, els.priceMinInput, els.priceMaxInput].forEach(input => {
+    input.min = bounds.min; input.max = bounds.max; input.step = 100;
+  });
+  els.priceMinRange.value = minValue;
+  els.priceMaxRange.value = maxValue;
+  els.priceMinInput.value = minValue;
+  els.priceMaxInput.value = maxValue;
+  els.filterForm.querySelectorAll('input[name="color"]').forEach(input => { input.checked = state.advancedFilters.colors.includes(input.value); });
+  const hardware = els.filterForm.querySelector(`input[name="hardware"][value="${state.advancedFilters.hardware}"]`);
+  const clasp = els.filterForm.querySelector(`input[name="clasp"][value="${state.advancedFilters.clasp}"]`);
+  if (hardware) hardware.checked = true;
+  if (clasp) clasp.checked = true;
+  const average = state.products.reduce((sum, product) => sum + product.price, 0) / Math.max(1, state.products.length);
+  els.averagePriceLabel.textContent = formatPrice(Math.round(average / 10) * 10);
+  updateFilterPreview();
+}
+
+function updateActiveFilterCount() {
+  const bounds = getPriceBounds();
+  const filters = state.advancedFilters;
+  let count = filters.colors.length;
+  if (filters.priceMin > bounds.min || filters.priceMax < bounds.max) count += 1;
+  if (filters.hardware !== "all") count += 1;
+  if (filters.clasp !== "all") count += 1;
+  els.activeFilterCount.textContent = count;
+  els.activeFilterCount.hidden = count === 0;
+  els.filterOpenButton.classList.toggle("is-active", count > 0);
+}
+
+function resetAdvancedFilters() {
+  const bounds = getPriceBounds();
+  state.advancedFilters = { priceMin: bounds.min, priceMax: bounds.max, colors: [], hardware: "all", clasp: "all" };
+  syncFilterFormFromState();
+}
+
+function openFilterDialog() {
+  syncFilterFormFromState();
+  els.filterDialog.showModal();
+  refreshIcons();
 }
 
 function productCardTemplate(product) {
@@ -603,6 +772,29 @@ function bindEvents() {
     openProductDialog(result.dataset.productId);
   });
 
+  els.filterOpenButton.addEventListener("click", openFilterDialog);
+  els.filterCloseButton.addEventListener("click", () => els.filterDialog.close());
+  els.filterDialog.addEventListener("click", closeDialogOnBackdrop);
+  els.priceMinRange.addEventListener("input", () => updateFilterPreview("min-range"));
+  els.priceMaxRange.addEventListener("input", () => updateFilterPreview("max-range"));
+  els.priceMinInput.addEventListener("input", () => updateFilterPreview("min-input"));
+  els.priceMaxInput.addEventListener("input", () => updateFilterPreview("max-input"));
+  els.filterForm.addEventListener("change", event => {
+    if (!event.target.matches('input[type="range"], input[type="number"]')) updateFilterPreview();
+  });
+  els.filterResetButton.addEventListener("click", () => {
+    resetAdvancedFilters();
+    updateFilterPreview();
+  });
+  els.filterForm.addEventListener("submit", event => {
+    event.preventDefault();
+    state.advancedFilters = readFilterDraft();
+    updateActiveFilterCount();
+    renderProducts();
+    els.filterDialog.close();
+    document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
   els.dialogClose.addEventListener("click", () => els.productDialog.close());
   els.productDialog.addEventListener("click", closeDialogOnBackdrop);
   els.dialogAddToCart.addEventListener("click", event => addToCart(event.currentTarget.dataset.productId));
@@ -629,11 +821,16 @@ function init() {
   }
   cacheElements();
   normalizeProducts();
+  const priceBounds = getPriceBounds();
+  if (!Number.isFinite(state.advancedFilters.priceMax)) state.advancedFilters.priceMax = priceBounds.max;
+  state.advancedFilters.priceMin = Math.max(priceBounds.min, state.advancedFilters.priceMin);
+  state.advancedFilters.priceMax = Math.min(priceBounds.max, state.advancedFilters.priceMax);
   renderProducts();
   renderCart();
   renderFavorites();
   setFeaturedProduct();
   bindEvents();
+  updateActiveFilterCount();
   setupReveal();
   refreshIcons();
 }

@@ -130,6 +130,11 @@
             <h2>Новые изделия</h2>
           </div>
           <div class="section-heading__tools">
+            <button class="filter-open-button" id="filterOpenButton" type="button">
+              <i data-lucide="sliders-horizontal"></i>
+              <span>Фильтры</span>
+              <em id="activeFilterCount" hidden>0</em>
+            </button>
             <label class="sort-select">
               <span class="sr-only">Сортировка</span>
               <select id="sortSelect">
@@ -320,6 +325,91 @@
       <div class="search-results" id="searchResults"></div>
     </div>
   </aside>
+
+  <dialog class="filter-dialog" id="filterDialog" aria-labelledby="filterTitle">
+    <form class="filter-dialog__panel" id="filterForm" method="dialog">
+      <header class="filter-dialog__header">
+        <div>
+          <p class="eyebrow">Точный подбор</p>
+          <h2 id="filterTitle">Фильтры</h2>
+        </div>
+        <button class="icon-button" id="filterCloseButton" type="button" aria-label="Закрыть фильтры"><i data-lucide="x"></i></button>
+      </header>
+
+      <div class="filter-dialog__body">
+        <section class="filter-section">
+          <div class="filter-section__heading">
+            <div>
+              <h3>Диапазон цены</h3>
+              <p>Средняя цена коллекции — <strong id="averagePriceLabel">0 ₽</strong></p>
+            </div>
+            <span id="selectedRangeLabel">0–0 ₽</span>
+          </div>
+
+          <div class="price-graph" id="priceGraph" aria-hidden="true">
+            <svg viewBox="0 0 600 150" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="priceAreaGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#e5c98e" stop-opacity=".42"/>
+                  <stop offset="100%" stop-color="#e5c98e" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path id="priceAreaPath" class="price-graph__area"></path>
+              <polyline id="priceLine" class="price-graph__line"></polyline>
+              <g id="pricePoints"></g>
+            </svg>
+          </div>
+
+          <div class="dual-range" id="dualRange">
+            <div class="dual-range__rail"></div>
+            <div class="dual-range__fill" id="rangeFill"></div>
+            <input id="priceMinRange" type="range" aria-label="Минимальная цена">
+            <input id="priceMaxRange" type="range" aria-label="Максимальная цена">
+          </div>
+
+          <div class="price-inputs">
+            <label><span>Минимальная цена</span><div><input id="priceMinInput" type="number" inputmode="numeric"><b>₽</b></div></label>
+            <label><span>Максимальная цена</span><div><input id="priceMaxInput" type="number" inputmode="numeric"><b>₽</b></div></label>
+          </div>
+        </section>
+
+        <section class="filter-section">
+          <h3>Оттенок камня</h3>
+          <div class="filter-option-grid" id="colorFilterGroup">
+            <label><input type="checkbox" name="color" value="green"><span><i class="swatch swatch--green"></i>Зелёные</span></label>
+            <label><input type="checkbox" name="color" value="blue"><span><i class="swatch swatch--blue"></i>Голубые</span></label>
+            <label><input type="checkbox" name="color" value="purple"><span><i class="swatch swatch--purple"></i>Фиолетовые</span></label>
+            <label><input type="checkbox" name="color" value="gold"><span><i class="swatch swatch--gold"></i>Золотистые</span></label>
+            <label><input type="checkbox" name="color" value="multi"><span><i class="swatch swatch--multi"></i>Мультиколор</span></label>
+            <label><input type="checkbox" name="color" value="dark"><span><i class="swatch swatch--dark"></i>Тёмные</span></label>
+          </div>
+        </section>
+
+        <section class="filter-section filter-section--split">
+          <div>
+            <h3>Фурнитура</h3>
+            <div class="choice-cards">
+              <label><input type="radio" name="hardware" value="all" checked><span>Любая</span></label>
+              <label><input type="radio" name="hardware" value="steel"><span>Нержавеющая сталь</span></label>
+            </div>
+          </div>
+          <div>
+            <h3>Конструкция</h3>
+            <div class="choice-cards">
+              <label><input type="radio" name="clasp" value="all" checked><span>Любая</span></label>
+              <label><input type="radio" name="clasp" value="yes"><span>С замком</span></label>
+              <label><input type="radio" name="clasp" value="no"><span>Без замка</span></label>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="filter-dialog__footer">
+        <button class="button button--outline" id="filterResetButton" type="button">Сбросить всё</button>
+        <button class="button button--gold" id="filterApplyButton" type="submit">Показать <span id="filterResultCount">0</span> изделий</button>
+      </footer>
+    </form>
+  </dialog>
 
   <dialog class="product-dialog" id="productDialog">
     <button class="icon-button dialog-close" type="button" id="dialogClose" aria-label="Закрыть"><i data-lucide="x"></i></button>
